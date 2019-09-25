@@ -1,0 +1,16 @@
+.form-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  overflow: hidden;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  align-items: center;
+  margin: 20px;
+}
