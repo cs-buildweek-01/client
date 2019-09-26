@@ -28,10 +28,11 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 const Router = () => {
   return (
     <Switch>
-      <Route path='/login' component={Login} />
-      <Route path='/register' component={Register} />
-      <Route path='/directions' component={Controls} />
-      <ProtectedRoute path='/game' component={Game} />
+      <Route exact path='/' component={Home} />
+      <Route exact path='/login' component={Login} />
+      <Route exact path='/register' component={Register} />
+      <Route exact path='/directions' component={Controls} />
+      <ProtectedRoute exact path='/game' component={Game} />
     </Switch>
   );
 };

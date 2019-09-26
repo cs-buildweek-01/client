@@ -1,21 +1,14 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import auth from '../../util/index';
 import Controls from '../Controls/Controls';
-import Room from '../Room/Room';
 import styled from 'styled-components';
-import {
-  FlexibleXYPlot,
-  LineSeries,
-  MarkSeries,
-  XYPlot,
-  VerticalGridLines,
-  HorizontalGridLines,
-  XAxis,
-  YAxis
-} from 'react-vis';
+import NavBar from '../NavBar/Nav';
+import { FlexibleXYPlot, LineSeries, MarkSeries } from 'react-vis';
+
+import { Container } from 'semantic-ui-react';
 
 import 'react-vis/dist/style.css';
+
 const StyledMap = styled.div`
   marginleft: 10%;
   width: 66%;
@@ -88,13 +81,15 @@ export default class Game extends Component {
 
   componentDidMount() {
     Promise.all([this.drawMap(), this.getInfo()]).then(values => {
-      console.log(values);
+      console.log('All the values shit: ', values);
+      console.log('All the values shit: ', values[1].title);
+
       this.setState({
         rooms: values[0],
         uuid: values[1].uuid,
         name: values[1].name,
-        title: values[1].name,
-        currentRoom: values[1].currentRoom,
+        title: values[1].title,
+        currentRoom: values[1].title,
         PlayerRoom: values[1].PlayerRoom,
         players: values[1].players,
         description: values[1].description,
@@ -170,38 +165,56 @@ export default class Game extends Component {
 
     //console.log('linkkkk', links);
     console.log(this.state.x, this.state.y);
+    console.log('STATATATAE', this.state.currentRoom);
     return (
       <>
-        <StyledMap>
-          <FlexibleXYPlot width={600} height={600}>
-            {links.map(link => (
-              <LineSeries
-                strokeWidth='1'
+        <NavBar />
+        <Container style={{ marginTop: '50px' }} text>
+          <StyledMap>
+            <FlexibleXYPlot width={600} height={600}>
+              {links.map(link => (
+                <LineSeries
+                  strokeWidth='1'
+                  color='black'
+                  data={link}
+                  key={Math.random(1000)}
+                />
+              ))}
+              <MarkSeries
+                strokeWidth={3}
+                opacity='1'
+                size='3'
+                data={coords}
                 color='black'
-                data={link}
-                key={Math.random(1000)}
+                style={{ cursor: 'pointer' }}
               />
-            ))}
-            <MarkSeries
-              strokeWidth={3}
-              opacity='1'
-              size='3'
-              data={coords}
-              style={{ cursor: 'pointer' }}
-            />
-            <MarkSeries
-              strokeWidth={3}
-              opacity='1'
-              size='3'
-              color='orange'
-              data={[{ x: this.state.x, y: this.state.y }]}
-              style={{ cursor: 'pointer' }}
-            />
-          </FlexibleXYPlot>
-          <div className='gameWrapper'>
-            <Controls move={this.move} />
-          </div>
-        </StyledMap>
+              <MarkSeries
+                strokeWidth={3}
+                opacity='1'
+                size='3'
+                color='yellow'
+                data={[{ x: this.state.x, y: this.state.y }]}
+                style={{ cursor: 'pointer' }}
+              />
+            </FlexibleXYPlot>
+
+            <div className='gameWrapper'>
+              <Controls move={this.move} />
+            </div>
+            <div className='gameInfo'>
+              <h3>Username:</h3>
+              <p> {this.state.name}</p>
+              <h3>Coordinates: </h3>
+              <p>
+                {this.state.x}, {this.state.y}
+              </p>
+              <h3>Current Room:</h3>
+              <p> {this.state.title}</p>
+              <h3>Room Info:</h3>
+              <p> {this.state.description}</p>
+            </div>
+          </StyledMap>
+        </Container>
       </>
     );
   }

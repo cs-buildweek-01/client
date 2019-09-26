@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './Controls.css';
-import auth from '../../util/index';
 
 export default class Controls extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
-      <div class='mainWrapper'>
+      <div className='mainWrapper'>
         <h3>Please Choose a direction.</h3>
-        <div class='controls'>
+        <div className='controls'>
           <p
+            className='controlButton'
             onClick={() => {
               this.props.move('n');
             }}
@@ -21,6 +16,7 @@ export default class Controls extends Component {
             N
           </p>
           <p
+            className='controlButton'
             onClick={() => {
               this.props.move('s');
             }}
@@ -28,6 +24,7 @@ export default class Controls extends Component {
             S
           </p>
           <p
+            className='controlButton'
             onClick={() => {
               this.props.move('e');
             }}
@@ -35,6 +32,7 @@ export default class Controls extends Component {
             E
           </p>
           <p
+            className='controlButton'
             onClick={() => {
               this.props.move('w');
             }}
