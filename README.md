@@ -1,4 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Live Demo
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1608d280-a985-48fd-8b9a-cd6054e6562b/deploy-status)](https://app.netlify.com/sites/dino-dungeons/deploys)
+Live Demo.<br>
+Open [https://dino-dungeons.netlify.com](https://dino-dungeons.netlify.com) to view it in the browser.
 
 ## Available Scripts
 
